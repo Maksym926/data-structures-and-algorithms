@@ -130,6 +130,47 @@ public class DoublyLinkedList {
         length--;
         return temp;
     }
+    public DoublyLinkedListNode get(int index){
+        if(index < 0 || index >= length){
+            return null;
+        }
+        int halfLength = length / 2;
+        DoublyLinkedListNode temp = null;
+        if(index < halfLength){
+            temp = head;
+            for(int i = 0; i < index; i++){
+                temp = temp.next;
+            }
+            temp.next = null;
+            temp.prev = null;
+            return temp;
+
+        }else if (index >= halfLength){
+            temp = tail;
+            for(int i = length - 1; i > index; i--){
+                temp = temp.prev;
+            }
+            temp.next = null;
+            temp.prev = null;
+            return temp;
+        }
+
+
+
+        return temp;
+
+
+
+    }
+    public boolean set(int index, int value){
+        DoublyLinkedListNode temp = get(index);
+        if(temp != null){
+            temp.data = value;
+            return true;
+        }
+        return false;
+    }
+
 
 
 }
