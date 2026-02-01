@@ -7,11 +7,11 @@ public class Prepend {
 
     public static void main(String[] args) {
         DoublyLinkedList doublyLinkedList = new DoublyLinkedList();
-        doublyLinkedList.insertNode(1);
-        doublyLinkedList.insertNode(2);
-        doublyLinkedList.insertNode(3);
-        doublyLinkedList.insertNode(4);
-        doublyLinkedList.insertNode(5);
+        doublyLinkedList.append(1);
+        doublyLinkedList.append(2);
+        doublyLinkedList.append(3);
+        doublyLinkedList.append(4);
+        doublyLinkedList.append(5);
         doublyLinkedList.prepend(10);
     }
 

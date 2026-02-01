@@ -21,7 +21,7 @@ public class DoublyLinkedList {
         this.tail = null;
     }
 
-    public void insertNode(int data){
+    public void append(int data){
         DoublyLinkedListNode node = new DoublyLinkedListNode(data);
         if(head == null){
             this.head = node;
@@ -171,6 +171,28 @@ public class DoublyLinkedList {
         return false;
     }
 
+    public boolean insert(int index, int value){
+        if(index < 0 || index>length){
+            return false;
+        }
+        if(index == 0){
+            prepend(value);
+            return true;
+        }
+        else if(index == length){
+            append(value);
+            return true;
+        }
+        DoublyLinkedListNode node = new DoublyLinkedListNode(value);
+        DoublyLinkedListNode before = get(index - 1);
+        DoublyLinkedListNode after = before.next;
+        node.prev = before;
+        node.next = after;
+        before.next = node;
+        after.prev = node;
+        length++;
+        return true;
 
+    }
 
 }
