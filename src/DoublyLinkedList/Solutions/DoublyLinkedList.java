@@ -107,5 +107,29 @@ public class DoublyLinkedList {
         length++;
     }
 
+    /**
+     * Removes the first node
+     *
+     */
+    public DoublyLinkedListNode removeFirst(){
+        DoublyLinkedListNode temp = head;
+        if(length == 0){
+            return null;
+        }
+
+        else if(length == 1){
+            head = null;
+            tail = null;
+
+        }
+        else{
+            this.head = head.next;
+            this.head.prev = null;
+            temp.next = null;
+        }
+        length--;
+        return temp;
+    }
+
 
 }
