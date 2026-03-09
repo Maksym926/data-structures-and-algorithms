@@ -210,5 +210,28 @@ public class DoublyLinkedList {
         length--;
         return temp;
     }
+    /*
+    Method checks if the list is palindrome
+    We traverse only the half of the array, in loop we check whether head value equals to the tail value.
+    If not, it's not a palindrome. if node's values are equal, take the previous tail and next head and check again.
+     */
+    public boolean isPalindrome(){
+
+        if(length == 1 || length == 0) return true;
+        DoublyLinkedListNode forward = head;
+        DoublyLinkedListNode backward = tail;
+        int counter = 0;
+        while(counter < length / 2){
+
+            if(forward.data != backward.data ) return false;
+
+            forward = forward.next;
+            backward = backward.prev;
+
+            counter+=1;
+        }
+
+        return true;
+    }
 
 }
