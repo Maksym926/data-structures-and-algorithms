@@ -233,5 +233,26 @@ public class DoublyLinkedList {
 
         return true;
     }
+    /*
+    Method reverses the list
+    We traverse the list from the tail to the head and swap the next and prev pointers.
+    When the current pointer reaches null we swap head and tail pointers.
+     */
+    public void reverse(){
+        if(length <= 1) return;
+        DoublyLinkedListNode current = tail;
+        DoublyLinkedListNode temp = null;
+        while(current != null){
+            current.next = current.prev;
+            current.prev = temp;
+
+            temp = current;
+            current = current.next;
+
+        }
+        DoublyLinkedListNode swap = head;
+        head = tail;
+        tail = swap;
+    }
 
 }
