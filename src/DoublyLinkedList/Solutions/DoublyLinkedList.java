@@ -254,5 +254,59 @@ public class DoublyLinkedList {
         head = tail;
         tail = swap;
     }
+    /**
+     * Partitions the list around x by relinking nodes
+     * all nodes with values < x come first, followed by nodes with values >= x,
+     * Runs in O(n) time and O(1) extra space. Updates head node
+     */
+    public void partitionList(int x) {
+        DoublyLinkedListNode newNode = head;
+
+        DoublyLinkedListNode smollerTail = null;
+        DoublyLinkedListNode smollerHead = null;
+
+        DoublyLinkedListNode biggerTail = null;
+        DoublyLinkedListNode biggerHead = null;
+
+        while(newNode != null){
+            DoublyLinkedListNode next = newNode.next;
+            newNode.next = null;
+            newNode.prev = null;
+            if(newNode.data<x){
+                if(smollerHead == null){
+                    smollerHead = newNode;
+                }else{
+                    smollerTail.next = newNode;
+                    newNode.prev = smollerTail;
+                }
+                smollerTail = newNode;
+
+            }
+            else{
+                if(biggerHead == null){
+                    biggerHead = newNode;
+                }else{
+                    biggerTail.next = newNode;
+                    newNode.prev = biggerTail;
+
+                }
+                biggerTail = newNode;
+            }
+            newNode = next;
+
+        }
+        if(smollerHead == null)
+            head = biggerHead;
+        else if(biggerHead == null)
+            head = smollerHead;
+        else{
+            smollerTail.next = biggerHead;
+            biggerHead.prev = smollerTail;
+            head = smollerHead;
+        }
+
+
+
+    }
 
 }
