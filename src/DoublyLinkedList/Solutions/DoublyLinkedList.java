@@ -306,7 +306,61 @@ public class DoublyLinkedList {
         }
 
 
+    }
+    /**
+     * About task
+     * Given the doubly linked list,
+     * and it's needed to swap every two adjacent nodes,
+     * if the linked list has an odd number of nodes we leave the last element as it is
+     *
+     * Solution
+     * This task uses three pointers: prevNode, first and second
+     * The first and second pointers represent the two nodes to be swapped
+     * The prevNode points to the node before the first node and is required to reconnect the swapped nodes correctly
+     *
+     * At the beginning prevNode equals the dummy node which points to the head node, the dummy node is needed to swap the first two elements correctly
+     *
+     * The swapping is performed until first reaches null (even length list) or first.next reaches null (odd length list)
+     *
+     * During each swap
+     *  first.next is updated to point to the node after second (skipping over second)
+     *  The node after second has its prev pointer updated to point back to first (if it exists)
+     *  second.next is updated to point to first (second now comes before first)
+     *  first.prev is updated to point to second
+     *  prevNode.next is updated to point to second (connecting the previous pair to the newly swapped pair)
+     *  second.prev is updated to point to prevNode
+     *
+     * Then prevNode advances to first (the new tail of the swapped pair) and first advances to first.next (the start of the next unswapped pair)
+     *
+     * After the loop, head is updated to dummy.next and head.prev is set to null to maintain a valid doubly linked list
+     *
+     * Time complexity O(n)
+     * Space complexity O(1)
+     *
+     */
+    public void swapPairs(){
+        if(head==null)return;
+        DoublyLinkedListNode dummy = new DoublyLinkedListNode(0);
+        dummy.next = head;
+        DoublyLinkedListNode prevNode = dummy;
+        DoublyLinkedListNode first = head;
 
+        while(first!=null && first.next != null){
+            DoublyLinkedListNode second = first.next;
+
+            first.next = second.next;
+            if(second.next!= null){second.next.prev = first;}
+            second.next = first;
+            first.prev = second;
+            prevNode.next = second;
+            second.prev = prevNode;
+
+
+            prevNode = first;
+            first = first.next;
+        }
+        head = dummy.next;
+        head.prev = null;
     }
 
 }
