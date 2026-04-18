@@ -81,5 +81,31 @@ public class StackImplementation {
 
         return stack.isEmpty();
     }
+    /**
+     * Takes a stack, pops each element and inserts it into a second stack
+     * in sorted order. Elements larger than the top of secondStack go straight on.
+     * Smaller elements cause secondStack to move items back to firstStack
+     * until the right position is found. Finally, transfers everything back.
+     */
+    public static StackImplementation sortStack(StackImplementation firstStack) {
+        if (firstStack.isEmpty()) return firstStack;
+        StackImplementation secondStack = new StackImplementation();
+
+        while (!firstStack.isEmpty()) {
+            int temp = firstStack.pop().data;
+
+            while (!secondStack.isEmpty() && temp < secondStack.top.data) {
+                firstStack.push(secondStack.pop().data);
+            }
+
+            secondStack.push(temp);
+        }
+
+        while (!secondStack.isEmpty()) {
+            firstStack.push(secondStack.pop().data);
+        }
+
+        return firstStack;
+    }
 
 }
