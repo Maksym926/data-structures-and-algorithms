@@ -15,6 +15,10 @@ public class StackImplementation {
         top = node;
         height = 1;
     }
+    public StackImplementation() {
+        top = null;
+        height = 0;
+    }
     public void getTop(){
         System.out.println(top.data);
     }
@@ -51,6 +55,31 @@ public class StackImplementation {
         temp.next = null;
         height--;
         return temp;
+    }
+    /**
+     * Loops through each character in the string.
+     * '(' → push it onto the stack.
+     * ')' → if stack is not empty, pop (a match is found),
+     *        if stack is empty, return false (no matching '(').
+     * After the loop, return true only if the stack is empty
+     * (all opening brackets were matched).
+     */
+    public static boolean isBalancedParentheses(String parentheses) {
+        StackImplementation stack = new StackImplementation();
+
+        for (char bracket : parentheses.toCharArray()) {
+            if (bracket == '(') {
+                stack.push(bracket);
+            } else {
+                if (!stack.isEmpty()) {
+                    stack.pop();
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        return stack.isEmpty();
     }
 
 }
