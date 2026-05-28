@@ -18,5 +18,14 @@ public class Main {
         int[] arr = {1, 2, 3, 2, 4, 3, 5};
         ArrayList<Integer> dups = HashTableProblems.findDuplicates(arr);
         System.out.println("findDuplicates: " + dups); // [2, 3]
+
+        // --- groupAnagrams ---
+        String[] words = {"eat", "tea", "tan", "ate", "nat", "bat"};
+        System.out.println("groupAnagrams: " + HashTableProblems.groupAnagrams(words));
+        // [[eat, tea, ate], [tan, nat], [bat]]
+
+        // --- firstNonRepeatingChar ---
+        System.out.println("firstNonRepeatingChar: " + HashTableProblems.firstNonRepeatingChar("leetcode")); // l
+        System.out.println("firstNonRepeatingChar: " + HashTableProblems.firstNonRepeatingChar("aabb"));    // null
     }
 }
