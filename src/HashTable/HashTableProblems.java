@@ -123,4 +123,70 @@ public class HashTableProblems {
         // All characters repeat — no unique character found
         return null;
     }
+
+    /**
+     * subarraySum - Find the indices [start, end] of a contiguous subarray that sums to target.
+     *
+     * Approach: Track a running total as we iterate. At each index, check if
+     * (runningTotal - target) was seen before — if so, the subarray between
+     * that earlier index + 1 and the current index sums to exactly target.
+     * Seeding the map with {0: -1} handles the case where the subarray starts at index 0.
+     *
+     * Time Complexity:  O(n) - single pass
+     * Space Complexity: O(n) - map stores at most n running totals
+     */
+    public static int[] subarraySum(int[] nums, int target) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        // Seed: a running total of 0 exists before index 0
+        map.put(0, -1);
+        int runningTotal = 0;
+
+        for (int i = 0; i < nums.length; i++) {
+            runningTotal += nums[i];
+
+            // If (runningTotal - target) was seen at index j,
+            // then nums[j+1..i] sums to target
+            if (map.containsKey(runningTotal - target)) {
+                return new int[]{map.get(runningTotal - target) + 1, i};
+            } else {
+                // Store this running total and its index for future lookups
+                map.put(runningTotal, i);
+            }
+        }
+
+        return new int[0]; // No subarray found
+    }
+
+    /**
+     * twoSum - Find indices of two numbers in the array that add up to target.
+     *
+     * Approach: For each number, compute the complement (target - num) and check
+     * if it already exists in the map. The map stores each number mapped to its
+     * most recent index, so we always return the latest valid pair.
+     *
+     * Time Complexity:  O(n) - single pass
+     * Space Complexity: O(n) - map stores at most n elements
+     */
+    public static int[] twoSum(int[] array, int target) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < array.length; i++) {
+            int num = array[i];
+
+            // Update index if number was seen before, otherwise insert it
+            if (map.containsKey(num)) {
+                map.replace(num, i);
+            } else {
+                map.put(num, i);
+            }
+
+            // Check if the complement needed to reach target is already in the map
+            int expected = target - num;
+            if (map.containsKey(expected)) {
+                return new int[]{i, map.get(expected)};
+            }
+        }
+
+        return new int[0]; // No valid pair found
+    }
 }

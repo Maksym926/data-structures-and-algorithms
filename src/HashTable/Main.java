@@ -27,5 +27,13 @@ public class Main {
         // --- firstNonRepeatingChar ---
         System.out.println("firstNonRepeatingChar: " + HashTableProblems.firstNonRepeatingChar("leetcode")); // l
         System.out.println("firstNonRepeatingChar: " + HashTableProblems.firstNonRepeatingChar("aabb"));    // null
+
+        // --- subarraySum ---
+        int[] nums = {1, 2, 3, 4, 5};
+        System.out.println("subarraySum: " + java.util.Arrays.toString(HashTableProblems.subarraySum(nums, 9)));  // [1, 3]
+
+        // --- twoSum ---
+        int[] pair = {2, 7, 11, 15};
+        System.out.println("twoSum: " + java.util.Arrays.toString(HashTableProblems.twoSum(pair, 9)));  // [1, 0]
     }
 }
