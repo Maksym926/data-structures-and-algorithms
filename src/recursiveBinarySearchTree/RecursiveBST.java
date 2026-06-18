@@ -82,4 +82,29 @@ public class RecursiveBST {
     public boolean rContains(int value){
         return rContains(root, value);
     }
+    private Node sortedArrayToBST(int[] nums, int left, int right){
+        Node bst = null;
+        if(right >= left){
+            int mid = (left + right) / 2;
+            bst = new Node(nums[mid]);
+            bst.left = sortedArrayToBST(nums, left, mid - 1);
+            bst.right = sortedArrayToBST(nums, mid+1, right);
+        }
+        return bst;
+    }
+    public void sortedArrayToBST(int[] nums){
+        root = sortedArrayToBST(nums, 0, nums.length - 1);
+    }
+    private Node invertTree(Node node){
+        if(node == null) return null;
+        Node temp = node.left;
+        node.left = node.right;
+        node.right = temp;
+        invertTree(node.left);
+        invertTree(node.right);
+        return node;
+    }
+    public void invertTree(){
+        root = invertTree(root);
+    }
 }

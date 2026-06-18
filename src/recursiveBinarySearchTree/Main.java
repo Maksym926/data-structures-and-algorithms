@@ -30,5 +30,21 @@ public class Main {
         BST.deleteNode(4);
         System.out.println("Contains 4 after delete: " + BST.rContains(4));  // false
         System.out.println("Contains 6 still there: " + BST.rContains(6));   // true
+
+        // Test sortedArrayToBST
+        RecursiveBST BST2 = new RecursiveBST();
+        int[] sortedNums = {1, 2, 3, 4, 5, 6, 7};
+        BST2.sortedArrayToBST(sortedNums);
+        System.out.println("BST2 contains 1: " + BST2.rContains(1)); // true
+        System.out.println("BST2 contains 4: " + BST2.rContains(4)); // true
+        System.out.println("BST2 contains 7: " + BST2.rContains(7)); // true
+        System.out.println("BST2 contains 9: " + BST2.rContains(9)); // false
+
+        // Test invertTree
+        // BST2 before invert: root=4, left subtree has 1,2,3 / right subtree has 5,6,7
+        // After invert: left and right subtrees are swapped at every node
+        BST2.invertTree();
+        System.out.println("After invert - contains 1: " + BST2.rContains(1)); // true
+        System.out.println("After invert - contains 7: " + BST2.rContains(7)); // true
     }
 }
